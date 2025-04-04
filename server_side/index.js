@@ -11,7 +11,6 @@ const mongoose = require('mongoose');
 // const dbConnect = require('./db_connect.js');
 
 const client = new MongoClient(uri, {
-  ssl: false,  // Tắt SSL
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
