@@ -86,7 +86,7 @@ const MovieCards = () => {
 
 const fetchMovies = async () => {
   try {
-    const response = await fetch("http://localhost:5000/api/movies/");
+    const response = await fetch("http://localhost:8000/api/movies/");
     const data = await response.json();
     console.log(data);
     return data || [];
