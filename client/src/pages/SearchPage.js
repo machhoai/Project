@@ -206,7 +206,7 @@ const fetchMovies = async () => {
 
   return (
     <div>
-      <h1 className="font-bold text-3xl" style={{ textAlign: "center", color: "black" }}>Search Movies</h1>
+      <h1 className="text-3xl font-bold" style={{ textAlign: "center", color: "black" }}>Search Movies</h1>
       <div className="my-4" style={{display:"flex", justifyContent:"center"}}>
         <input type="text" placeholder="Search movies" className="w-[40%] p-2 rounded-lg border-2 border-gray-300 my-1"
         onChange={(e)=>{
@@ -238,13 +238,13 @@ const fetchMovies = async () => {
                 </div>
                 <div style={{display:"flex", justifyContent:"end", alignItems:"end"}}>
                   <Link className="w-full" to={`/movies/${movie.id}`}>
-                    <div className="h-10 w-full mt-4 overflow-hidden relative rounded-xl px-6 py-2 bg-white text-black flex justify-center items-end group/modal-btn">
+                    <div className="relative flex items-end justify-center w-full h-10 px-6 py-2 mt-4 overflow-hidden text-black bg-white rounded-xl group/modal-btn">
                       <span
-                        className="group-hover/modal-btn:translate-x-52 text-center transition duration-500">
+                        className="text-center transition duration-500 group-hover/modal-btn:translate-x-52">
                         Play now
                       </span>
                       <div
-                        className=" -translate-x-52 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
+                        className="absolute inset-0 z-20 flex items-center justify-center text-white transition duration-500 -translate-x-52 group-hover/modal-btn:translate-x-0">
                         🍿
                       </div>
                     </div>
@@ -252,7 +252,7 @@ const fetchMovies = async () => {
                 </div>
                 <div className="flex w-full gap-1">
                   <Link className="w-full" to={`/update-movie/${movie.id}`}>
-                    <div className="h-10 w-full mt-1 overflow-hidden relative rounded-xl px-6 py-2 bg-cyan-700 text-white flex justify-center items-end group/modal-btn">
+                    <div className="relative flex items-end justify-center w-full h-10 px-6 py-2 mt-1 overflow-hidden text-white rounded-xl bg-cyan-700 group/modal-btn">
                       <span
                         className="text-center transition duration-500">
                         Edit
@@ -261,7 +261,7 @@ const fetchMovies = async () => {
                   </Link>
                   <Button variant="outline-danger" className="h-10 mt-1 rounded-xl">Delete</Button>
                   {/* <Link className="" to={`/delete-movie/${movie.id}`}>
-                    <div className="h-10 w-full mt-1 overflow-hidden relative rounded-xl px-6 py-2 bg-rose-600 text-white flex justify-center items-end group/modal-btn">
+                    <div className="relative flex items-end justify-center w-full h-10 px-6 py-2 mt-1 overflow-hidden text-white rounded-xl bg-rose-600 group/modal-btn">
                       <span
                         className="text-center transition duration-500">
                         Del
