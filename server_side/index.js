@@ -7,9 +7,6 @@ const uri = "mongodb+srv://admin:11122004@cluster0.fv5recd.mongodb.net/?retryWri
 const cors = require('cors');
 app.use(cors());
 
-const mongoose = require('mongoose');
-// const dbConnect = require('./db_connect.js');
-
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,

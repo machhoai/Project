@@ -269,8 +269,6 @@ const fetchMovies = async () => {
                     </div>
                   </Link> */}
 
-                    <p class="text-base md:text-lg lg:text-xl">Responsive Text</p>
-
                 </div>
               </div>
             );
