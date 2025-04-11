@@ -6,7 +6,7 @@ const uri = "mongodb+srv://admin:11122004@cluster0.fv5recd.mongodb.net/?retryWri
 
 const cors = require('cors');
 app.use(cors({
-  origin: 'https://vlu-nhom02.vercel.app/', // hoặc '*' nếu muốn mở toàn bộ (không khuyến khích cho production)
+  origin: 'https://vlu-nhom02.vercel.app', // hoặc '*' nếu muốn mở toàn bộ (không khuyến khích cho production)
 }));
 
 const mongoose = require('mongoose');
