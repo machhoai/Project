@@ -5,7 +5,9 @@ const port = 5000;
 const uri = "mongodb+srv://admin:11122004@cluster0.fv5recd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+  origin: 'https://vlu-nhom02.vercel.app/', // hoặc '*' nếu muốn mở toàn bộ (không khuyến khích cho production)
+}));
 
 const mongoose = require('mongoose');
 // const dbConnect = require('./db_connect.js');
