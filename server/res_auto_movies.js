@@ -16,8 +16,12 @@ async function fetchMovies(page) {
                 sort_by: 'popularity.desc',
                 include_adult: false,
                 include_video: true,
-                ['primary_release_date.gte']: '2025-04-17',
-                ['primary_release_date.lte']: '2025-04-17'
+                ['primary_release_date.gte']: '2024-01-01',
+                ['primary_release_date.lte']: '2025-04-17',
+                region: 'VN',
+                // with_original_language: 'es|ko|ja|vi|cn|vn',
+                ['vote_count.gte']: 50,
+                // ['vote_average.gte']:5,
             }
         });
         return response.data.results;
@@ -29,12 +33,13 @@ async function fetchMovies(page) {
 
 // Hàm tạo ID phim theo yêu cầu
 function generateCustomID(movie) {
-    // console.log(movie.genre_ids[0]);  // Kiểm tra kiểu dữ liệu của genresID
-    // console.log(typeof movie.genre_ids[0]);  // Kiểm tra kiểu dữ liệu của genresID
-    const genresID = movie.genre_ids[0].toString().padStart(5, '0');  // Lấy genre_id đầu tiên và tạo thành chuỗi dài 5 ký tự
-    const tmdbID = movie.id.toString().padStart(7, '0');  // Đảm bảo ID phim TMDB có đủ 7 chữ số
+    let genresID = '00000';  // Mặc định nếu không có genre
 
-    // Cấu trúc ID theo yêu cầu
+    if (Array.isArray(movie.genre_ids) && movie.genre_ids.length > 0) {
+        genresID = movie.genre_ids[0].toString().padStart(5, '0');
+    }
+
+    const tmdbID = movie.id.toString().padStart(7, '0');
     const customID = `MV${genresID}${tmdbID}`;
     return customID;
 }
@@ -44,14 +49,21 @@ async function processMovies(totalPages = 10) {
     const allMovies = []; // Mảng lưu trữ tất cả phim có ID tùy chỉnh
     
     for (let page = 1; page <= totalPages; page++) {
-        const movies = await fetchMovies(2);
+        const movies = await fetchMovies(page);
         console.log(`Page ${page}:`);
         console.log(movies.lenght);  // In ra danh sách phim của trang hiện tại
         movies.forEach(movie => {
+            // Bỏ qua phim không có genre_ids
+            if (!Array.isArray(movie.genre_ids) || movie.genre_ids.length === 0) {
+                console.warn(`❌ Bỏ qua phim không có genre_ids: "${movie.title}" (ID: ${movie.id})`);
+                return; // skip
+            }
+        
             const customID = generateCustomID(movie);
-            movie.custom_id = customID;  // Thêm custom_id vào movie
-            allMovies.push(movie);  // Thêm movie vào mảng
-            console.log(`Original TMDB ID: ${movie.id}, Custom ID: ${customID}`);
+            movie.id = customID; // Ghi đè ID gốc bằng custom ID
+        
+            allMovies.push(movie);
+            console.log(`✅ Thay thế ID bằng Custom ID: ${customID}`);
         });
     }
 
@@ -61,4 +73,4 @@ async function processMovies(totalPages = 10) {
 }
 
 // Chạy tool và lấy 10 trang phim
-processMovies(10);
+processMovies(37);
